@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import api from './apiaxios';
 import { StyleSheet, View, Text, SafeAreaView,Modal  } from 'react-native';
 import { FlatList, TextInput } from 'react-native-gesture-handler';
 import {Button} from 'react-native-elements';
@@ -53,20 +52,7 @@ export default class Main extends React.Component {
         
         
     }
-    insert(){
-        var requestOptions = {
-            method: 'POST',
-            redirect: 'follow'
-          };
-          
-          fetch("http://192.168.15.6:8000/api/produtos?nome="+this.state.nome+"&desc="+this.state.desc+"", requestOptions)
-            .then(response => response.text())
-            .then(result => console.log(result))
-            .then(this.loadProducts)
-            .then(alert('Inserido com sucesso'))
-            .catch(error => console.log('error', error));
-            
-       };
+    
     async updateItem(key){
         this.setState({isVisible:true})
         var requestOptions = {
@@ -82,16 +68,6 @@ export default class Main extends React.Component {
             .catch(error => console.log('error', error));
             
        };
-    handlerRefresh = () => {
-        this.setState({
-            page: 1,
-            refresh: true,
-            seed: this.state.seed + 1,
-        },() =>{this.makeRemoteRequest()})
-    }
-    async showPrompt(){
-        this.state.visible = true
-    }
    
     loadProducts = async () => {
         this.setState({isLoading:false})
